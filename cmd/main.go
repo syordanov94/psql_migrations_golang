@@ -19,9 +19,8 @@ func main() {
 	migrator := migrator.NewMigrator(MigrationsFS, migrationsDir)
 
 	// --- (2) ----
-	// Apply migrations
+	// Get the DB instance
 	connectionStr := "postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable"
-
 	conn, err := sql.Open("postgres", connectionStr)
 	if err != nil {
 		panic(err)
@@ -29,6 +28,8 @@ func main() {
 
 	defer conn.Close()
 
+	// --- (2) ----
+	// Apply migrations
 	err = migrator.ApplyMigrations(context.Background(), conn)
 	if err != nil {
 		panic(err)
