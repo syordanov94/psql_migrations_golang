@@ -1,7 +1,6 @@
 package migrator
 
 import (
-	"context"
 	"database/sql"
 	"embed"
 	"errors"
@@ -27,7 +26,7 @@ func MustGetNewMigrator(sqlFiles embed.FS, dirName string) *Migrator {
 	}
 }
 
-func (m *Migrator) ApplyMigrations(ctx context.Context, db *sql.DB) error {
+func (m *Migrator) ApplyMigrations(db *sql.DB) error {
 	driver, err := postgres.WithInstance(db, &postgres.Config{})
 	if err != nil {
 		return fmt.Errorf("unable to create db instance: %v", err)

@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"database/sql"
 	"embed"
 	"fmt"
@@ -30,7 +29,7 @@ func main() {
 
 	// --- (2) ----
 	// Apply migrations
-	err = migrator.ApplyMigrations(context.Background(), conn)
+	err = migrator.ApplyMigrations(conn)
 	if err != nil {
 		panic(err)
 	}
